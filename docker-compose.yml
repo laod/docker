@@ -1,0 +1,16 @@
+smtp-data:
+  image: loophole/smtp-data
+syslog:
+  image: loophole/syslog
+  volumes:
+    - /tmp/syslogdev:/dev
+smtp:
+  image: loophole/smtp-private
+  volumes_from:
+    - smtp-data
+  volumes:
+    - /tmp/syslogdev/log:/var/spool/postfix/dev/log
+  environment:
+    mydestination: housh.email
+  ports:
+    - "25:25"
