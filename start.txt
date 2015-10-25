@@ -1,5 +1,4 @@
 TODO ssh container
-TODO docker compose file
 
 docker run -d --name syslog -v /tmp/syslogdev:/dev loophole/syslog
 docker run -d --name mx-data loophole/smtp-data
