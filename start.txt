@@ -1,17 +1,26 @@
-TODO ssh container
 
-docker run -d --name syslog -v /tmp/syslogdev:/dev loophole/syslog
-docker run -d --name mx-data loophole/smtp-data
-docker run -d --name mx --volumes-from mx-data -v /tmp/syslogdev/log:/var/spool/postfix/dev/log -p 25:25 -e "mydestination=mydomain.tld" loophole/smtp
-exec in and create users, edit aliases, etc
-docker commit mx
-docker tag <image hash from commit> loophole/smtp-private
-docker stop mx && docker rm mx
-docker run -d --name mx --volumes-from mx-data -v /tmp/syslogdev/log:/var/spool/postfix/dev/log -p 25:25 -e "mydestination=mydomain.tld" loophole/smtp-private
+Manually:
+
+  docker run -d --name syslog -v /tmp/syslogdev:/dev loophole/syslog
+  docker run -d --name mx-data loophole/smtp-data
+  docker run -d --name mx --volumes-from mx-data -v /tmp/syslogdev/log:/var/spool/postfix/dev/log -p 25:25 -e "mydestination=mydomain.tld" loophole/smtp-private
+  docker run -d --name sshd --volumes-from mx-data -p 2697:22 loophole/sshd-private
+
+Automagically: docker-compose up -d
+
+To create the -private containers:
+
+  docker run -d --name mx --volumes-from mx-data -v /tmp/syslogdev/log:/var/spool/postfix/dev/log -p 25:25 -e "mydestination=mydomain.tld" loophole/smtp
+  exec in and create users, edit aliases, etc
+  docker commit mx
+  docker tag <image hash from commit> loophole/smtp-private
+  docker stop mx && docker rm mx
+  
+  similar process for loophole/sshd -> loophole/sshd-private
 
 Intention is to mount maildir remotely via sshfs
 
-can check mail by execing in to mx, installing mutt, configuring ~/.muttrc for your user as:
+Can check mail by execing in to mx, installing mutt, configuring ~/.muttrc for your user as:
 
 ------
 set mbox_type=Maildir

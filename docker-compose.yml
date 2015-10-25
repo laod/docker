@@ -14,3 +14,9 @@ smtp:
     mydestination: housh.email
   ports:
     - "25:25"
+sshd:
+  image: loophole/sshd-private
+  volumes_from:
+    - smtp-data
+  ports:
+    - "2697:22"
