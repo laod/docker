@@ -24,7 +24,7 @@ Intention is to mount maildir remotely via sshfs
 
 Can check mail by execing in to mx, installing mutt, configuring ~/.muttrc for your user as:
 
-`set mbox_type=Maildir
+``set mbox_type=Maildir
 set folder="~/mail"
 set mask="!^\\.[^.]"
 set mbox="~/mail"
@@ -40,6 +40,6 @@ macro pager c "<change-folder>?<toggle-mailboxes>" "open a different folder"
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 
-macro compose A "<attach-message>?<toggle-mailboxes>" "attach message(s) to this message"`
+macro compose A "<attach-message>?<toggle-mailboxes>" "attach message(s) to this message"``
 
 and running mutt
