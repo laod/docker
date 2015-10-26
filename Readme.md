@@ -8,9 +8,9 @@ Manually:
 
 Automagically: docker-compose up -d
 
-The idea is to set up users, passwords, secrets in a -private images
+The idea is to set up users, passwords, secrets in private images. The private images are made by running the base image and making and committing chnages.
 
-private images example:
+Example:
 
   docker run -d --name mx --volumes-from mx-data -v /tmp/syslogdev/log:/var/spool/postfix/dev/log -p 25:25 -e "mydestination=mydomain.tld" loophole/smtp
   exec in and create users, edit aliases, etc
