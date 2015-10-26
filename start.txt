@@ -8,7 +8,9 @@ Manually:
 
 Automagically: docker-compose up -d
 
-To create the -private containers:
+The idea is to set up users, passwords, secrets in a -private images
+
+private images example:
 
   docker run -d --name mx --volumes-from mx-data -v /tmp/syslogdev/log:/var/spool/postfix/dev/log -p 25:25 -e "mydestination=mydomain.tld" loophole/smtp
   exec in and create users, edit aliases, etc
